@@ -34,6 +34,7 @@ LD = $(CXX)
 
 #INCLUDES += -I/path/to/my/lib/include
 #INCLUDES += -I../mylib/public
+INCLUDES += -Ithirdparty/sh2
 
 #LIBS += -L/path/to/my/lib/$(PLATFORM)/usr/lib -lmylib
 #LIBS += -L../mylib/$(OUTPUT_DIR) -lmylib
@@ -65,12 +66,12 @@ OBJS = $(addprefix $(OUTPUT_DIR)/,$(addsuffix .o, $(basename $(SRCS))))
 
 #Compiling rule for c
 $(OUTPUT_DIR)/%.o: %.c
-	-@mkdir -p $(OUTPUT_DIR)
+	-@mkdir -p $(dir $@)
 	$(CC) -c $(DEPS) -o $@ $(INCLUDES) $(CCFLAGS_all) $(CCFLAGS) $<
 
 #Compiling rule for c++
 $(OUTPUT_DIR)/%.o: %.cpp
-	-@mkdir -p $(OUTPUT_DIR)
+	-@mkdir -p $(dir $@)
 	$(CXX) -c $(DEPS) -o $@ $(INCLUDES) $(CCFLAGS_all) $(CCFLAGS) $<
 
 #Linking rule
